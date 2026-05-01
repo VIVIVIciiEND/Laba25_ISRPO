@@ -265,26 +265,128 @@
 //     }
 // }
 // getUserById(1);
-async function createPost(){
-    try{
-        const newPost={
-            title : "моя первая запись" , 
-            body : "это содержание моей первйо записи в блоге" , 
-            userId: 1 , 
-        };
-        const response = await fetch("https://jsonplaceholder.typicode.com/posts" , {
-            method: "POST" ,
-            headers: {
-                "Content-Type" : "application/json" , 
-            },
-            body : JSON.stringify(newPost) , 
-        });
-        const createPost = await response.json();
-        console.log("создана новая запись"); 
-        console.log("ID" , createPost.id) ; 
-        console.log("заголовок" , createPost.title) ; 
-    }catch(error){
-        console.log("ошибка при создании записи" , error.message) ; 
+// async function createPost(){
+//     try{
+//         const newPost={
+//             title : "моя первая запись" , 
+//             body : "это содержание моей первйо записи в блоге" , 
+//             userId: 1 , 
+//         };
+//         const response = await fetch("https://jsonplaceholder.typicode.com/posts" , {
+//             method: "POST" ,
+//             headers: {
+//                 "Content-Type" : "application/json" , 
+//             },
+//             body : JSON.stringify(newPost) , 
+//         });
+//         const createPost = await response.json();
+//         console.log("создана новая запись"); 
+//         console.log("ID" , createPost.id) ; 
+//         console.log("заголовок" , createPost.title) ; 
+//     }catch(error){
+//         console.log("ошибка при создании записи" , error.message) ; 
+//     }
+// }
+// createPost();
+
+// console.log("Optional Chaining") ;
+// const user1 = {
+//     name : "Андрей" , 
+//     address: {
+//         city : "Волжский" , 
+//         street : "Пушкина" ,
+//     },
+// };
+// const user2 ={
+//     name : "Дмитрий" , 
+
+// };
+// const city = user2.address && user2.address.city;
+// console.log("Город (старый способ) " , city1);
+// const city2 = user2.address?.city;
+// console.log("Город (новый способ)" , city2);
+// const street = user1.address?.street;
+// console.log("улица" , street) ; 
+
+// const admin = {
+//     name: "администратор" , 
+//     permissions : {
+//         canDelete: () => true,
+//     },
+// };
+// const guest ={
+//     name : "Гость" , 
+// }
+// console.log("админ можеи удалять"  , admin.permissions?.canDelete?.());
+// console.log("гость может удалять?" , guest.permissions?.canDelete?.());
+// const company = {
+//     name: "Tech Corp",
+//     employees: [
+//         {name: "Надежда", role: "Developer"},
+//         {name: "Анна", role: "Designer"},
+//     ],
+// };
+// const startup = {
+//     name: "New Startup",
+// };
+// console.log("Первый сотрудник:", company.employees?.[0]?.name);
+// console.log("Первый сотрудник стартапа:",startup.employees?.[0]?.name);
+// console.log("Nullish Coalescing");
+// const value1 = 0;
+// const value2 = "";
+// const value3 = false;
+// const value4 = null;
+// const value5 = undefined;
+// console.log('value1 || default:', value1 || "default");
+// console.log('value2 || default:', value2 || "default");
+// console.log('value3 || default:', value3 || "default");
+// console.log('value1 ?? "default":', value1 ?? "default");
+// console.log('value2 ?? "default":', value2 ?? "default");
+// console.log('value3 ?? "default":', value3 ?? "default");
+// console.log('value4 ?? "default":', value4 ?? "default");
+// console.log('value5 ?? "default":', value5 ?? "default");
+// function displayUserSettings(settings) {
+//     const theme = settings?.theme ?? "light";
+//     const fontSize = settings?.fontSize ?? 14;
+//     const notifications = settings?.notifications ?? true;
+//     console.log("Настройки пользователя:");
+//     console.log("Тема:", theme);
+//     console.log("Размер шрифта:", fontSize);
+//     console.log("Уведомления:", notifications);
+// }
+// displayUserSettings({ theme: "dark", fontSize: 16});
+// displayUserSettings({notifications: false});
+// displayUserSettings({});
+const order = {
+    orderId: 12345,
+    customer: {
+        name: "Динара Жанатпаева",
+        email: "akirmandianr@gmail.com",
+    },
+    shipping: {
+            city: "Волжский",
+            street: "Карбышева",
+    },
+    payment: {
+        method: "Карта",
+        status: "Оплачен"
     }
+};
+function displayOrder(order) {
+    console.log(`заказ: ${order.orderId ?? "---"}`);
+    const customerName = order.customer?.name ?? "---";
+    const customerEmail = order.customer?.email ?? "---";
+    console.log("Клиент:");
+    console.log(`Имя: ${customerName}`);
+    console.log(`Email: ${customerEmail}`);
+    const street = order.shipping?.address?.street ?? "---";
+    const city = order.shipping?.address?.city ?? "---";
+    console.log("Доставка:");
+    console.log(`Адрес: ${street}, ${city}, ${zipCode}`);
+    const paymentMethod = order.payment?.method ?? "---";
+    const paymentStatus = order.payment?.status ?? "---";
+    console.log("Оплата:");
+    console.log(`Метод: ${paymentMethod}`);
+    console.log(`Статус: ${paymentStatus}`);
 }
-createPost();
+displayOrder(order);
